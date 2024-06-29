@@ -1,15 +1,18 @@
 C:\Users\22965\anaconda3\envs\autorun\python "C:\Users\22965\LocalPC\UI_autorun\myauto\bjl.py"
 @echo off
-set /a countdown=60
+setlocal enabledelayedexpansion
+set /a countdown=10
 echo cmd will be closed, please note...
 :countdown
-echo Remaining Time: %countdown% seconds
+<nul set /p =Remaining Time: !countdown! seconds
 set /a countdown-=1
 timeout /t 1 >nul
-if %countdown% leq 0 goto exit
-goto countdown
+if !countdown! gtr 0 (
+    echo.
+    goto countdown
+)
 
-:exit
+echo.
 echo Countdown finished, the window will close now.
-timeout /t 1 >nul
+timeout /t 2 >nul
 exit

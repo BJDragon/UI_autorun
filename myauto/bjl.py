@@ -8,7 +8,7 @@ import time
 import os
 
 message = "————————————————————————————————————————————————————\n" \
-          "操作当中涉及点击鼠标，输入、粘贴数据，这两者组合可能将代码写入脚本当中，需要主要不要造成不良影响！"
+          "操作当中涉及点击鼠标，输入、粘贴数据，这两者组合可能将代码写入脚本当中，需要注意不要造成不良影响！"
 print(message)
 def dataCheck(sheet1):
     """
@@ -168,7 +168,23 @@ def main(sheet1):
             print("第", i, "行指令执行失败\n")
             break
 
-
+def autorun():
+    pyautogui.hotkey('win', '1')
+    time.sleep(0.5)
+    pyautogui.press('1')
+    time.sleep(10)
+    pyautogui.press('tab')
+    pyautogui.press('enter')
+    time.sleep(1)
+    for i in range(4):
+        pyautogui.press('tab')
+    passwd = '11071135Ecust#'
+    # 复制密码，粘贴密码
+    pyperclip.copy(passwd)
+    pyautogui.hotkey('ctrl', 'v')
+    pyautogui.press('enter')
+    time.sleep(0.5)
+    pyautogui.hotkey('ctrl', 'w')
 
 if __name__ == '__main__':
     base_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
@@ -181,3 +197,5 @@ if __name__ == '__main__':
     sheet1 = wb.sheet_by_index(0)
     # print(sheet1.row().value)
     main(sheet1)
+    # autorun()
+
