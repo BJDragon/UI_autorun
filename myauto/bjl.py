@@ -10,6 +10,8 @@ import os
 message = "————————————————————————————————————————————————————\n" \
           "操作当中涉及点击鼠标，输入、粘贴数据，这两者组合可能将代码写入脚本当中，需要注意不要造成不良影响！"
 print(message)
+
+
 def dataCheck(sheet1):
     """
     检查给定表格的数据是否符合指定格式。
@@ -156,9 +158,10 @@ def cmd_action(cmdType, cmdValue=None):
         pyautogui.press('tab')
         print("Tab按下")
 
+
 def main(sheet1):
     nrows = sheet1.nrows
-    for i in range(1,nrows):
+    for i in range(1, nrows):
         try:
             cmdType = sheet1.row(i)[0]
             cmdValue = sheet1.row(i)[1].value
@@ -168,34 +171,41 @@ def main(sheet1):
             print("第", i, "行指令执行失败\n")
             break
 
+
 def autorun():
+    """测试功能，仅代码控制，无用户参与"""
     pyautogui.hotkey('win', '1')
     time.sleep(0.5)
+    pyautogui.hotkey('ctrl', 'N')
+    # pyautogui.hotkey('ctrl', 'n')
+    # 172.20.3.81:801/srun_portal_pc.php?ac_id=63&
     pyautogui.press('1')
-    time.sleep(10)
-    pyautogui.press('tab')
+    time.sleep(0.5)
     pyautogui.press('enter')
+
     time.sleep(1)
+
     for i in range(4):
         pyautogui.press('tab')
-    passwd = '11071135Ecust#'
+
     # 复制密码，粘贴密码
+    passwd = '11071135Ecust#'
     pyperclip.copy(passwd)
     pyautogui.hotkey('ctrl', 'v')
+
     pyautogui.press('enter')
     time.sleep(0.5)
     pyautogui.hotkey('ctrl', 'w')
+
 
 if __name__ == '__main__':
     base_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
     print(base_dir)
     file = os.path.join(base_dir, 'cmd.xls')
-    # file = 'cmd.xls'
-    # file = 'test.xls'
+
     wb = xlrd.open_workbook(filename=file)
     # 通过索引获取表格sheet页
     sheet1 = wb.sheet_by_index(0)
-    # print(sheet1.row().value)
-    main(sheet1)
-    # autorun()
 
+    # main(sheet1)
+    autorun()
